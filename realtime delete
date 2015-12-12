@@ -3,6 +3,8 @@
     <h1>hello Comment</h1>
     <ul >
       <li ng-repeat="comment in comments">
+      
+      // add a delete comment button
         <button ng-click="deleteComment(comment)"> Delete </button> 
         {{comment.title}}
       </li>
@@ -30,7 +32,7 @@ function CommentController ($scope) {
     io.socket.on("comment", function (result) {
       console.log("listen ...");
       console.log(result);
-      
+      //create delete function
       if (result.verb === "destroyed") {
         var index = -1;
         for (var i=0; i< $scope.comments.length; i++) {
@@ -53,7 +55,7 @@ function CommentController ($scope) {
     });
   });
  
-  
+  // show delete effect in real time
   $scope.deleteComment = function (comment) {
     io.socket.delete("/comment", {
       id: comment.id
